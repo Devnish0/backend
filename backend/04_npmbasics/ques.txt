@@ -1,0 +1,7 @@
+jb hum koi script chalate hai to hum uske liye kabhi 
+npm run dev 
+npm start 
+npm test 
+
+answer:
+there are two scripts - start and test
