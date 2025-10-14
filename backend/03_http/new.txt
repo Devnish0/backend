@@ -1,0 +1,12 @@
+protocol -- rules
+internet par kuch bhi karne ke liye kuch set of rules hai jo follow karne padte hai jo jinhone internet banaaya hai unke hai
+ye rules humare os me built in ir we can say pre installed aate hai
+jaise ki http, https, ftp, tcp, udp etc
+
+1. http - protocol
+yahi protocol hai jiske bina aap internet naa hi kuch bhej sakte ho(post) na kuch le sakte ho(get)
+ye protocol client aur server ke beech me communication ke liye use hota hai
+
+--------------- http is a module in nodejs -----------------
+
+  
