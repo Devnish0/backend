@@ -72,10 +72,6 @@ const mymiddleware = (req, res, next) => {
   next();
 };
 
-app.use((req, res, next) => {
-  console.log("wow this is really working");
-});
-
 app.get("/", mymiddleware, (req, res) => {
   res.send("this is on / route");
 });
