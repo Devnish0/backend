@@ -72,6 +72,10 @@ const mymiddleware = (req, res, next) => {
   next();
 };
 
+app.use((req, res, next) => {
+  console.log("wow this is really working");
+});
+
 app.get("/", mymiddleware, (req, res) => {
   res.send("this is on / route");
 });
@@ -96,7 +100,5 @@ app.listen(3001);
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("something broke");
-//   sabse last me lagana hai
+  //   sabse last me lagana hai
 });
-
-

@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "",
   "main": "index.js",
   "scripts": {
     "start": "node ./04_npmbasics/script.js ",
