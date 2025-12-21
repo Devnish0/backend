@@ -35,7 +35,7 @@
 
 // key takeaway is
 // app.use to make a response for every request
-// app.get is to make a response fot a particular route
+// app.get is to make a response fot a particular route // api endpoint
 
 const express = require("express");
 

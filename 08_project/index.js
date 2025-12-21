@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const port = 3027;
+const ejs = require("ejs");
 
 // function name(req, res, next) {
 //   console.log(req.params.name);
@@ -14,7 +16,8 @@ app.use(express.urlencoded({ extended: true })); //for the url encoded incoming 
 app.use(express.static(path.join(__dirname, "public"))); // the static files ie css js files will be available to this folder
 
 app.get("/", (req, res) => {
+  // res.render("index");
   res.render("index");
 });
 
-app.listen(3000);
+app.listen(port, console.log("the node has started"));

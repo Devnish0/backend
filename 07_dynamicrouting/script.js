@@ -35,12 +35,11 @@ app.get(`/`, (req, res, next) => {
   // fun fact res.end comes from the node and it is pure html no headers etc
   //  whereas res.send is an express thing that knows what we are sending ie the html headers can be set according to the data
 });
-
 app.get(`/home`, (req, res, next) => {
   res.render("home");
 });
 app.listen(3300, () => {
-  console.log("it is running");
+  console.log(`it is running at http://localhost:3300`);
 });
 
 // --------------ejs-----------------------//
@@ -75,5 +74,9 @@ app.get("/author/:username/:age", (req, res) => {
   // res.send(
   // `hey there the name is ${req.params.username} and the age is  ${req.params.age}`
   // );
+  res.send(req.params);
+});
+
+app.get("/search/:query", (req, res) => {
   res.send(req.params);
 });
