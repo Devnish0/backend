@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <% let lastobj = data[data.length-1]; console.log(lastobj) %>
+    <div class="bg-[#cdcdf1] h-screen w-full flex">
+      <div class="left w-[70%] h-full flex items-center justify-center">
+        <div
+          class="h-auto py-13 w-[60%] bg-yellow-400 border-3 border-black rounded-xl"
+        >
+          <div class="w-full font-sans text-2xl flex justify-center my-10">
+            Enter Your Link
+          </div>
+          <form action="/create" method="post" class="my-4 flex justify-center">
+            <input
+              type="text"
+              name="longurl"
+              id=""
+              class="border-2 border-black w-103 text-xl p-3 h-12 bg-white rounded-md"
+            />
+            <input
+              type="submit"
+              value="Enter"
+              class="bg-black ml-3 w-28 rounded-md text-white cursor-pointer"
+            />
+          </form>
+          <div
+            class="flex ml-[17%] mt-22 font-bold text-xl items-start flex-col"
+          >
+            <div>
+              Link :
+              <span class="text-[#808080] font-normal text-md"
+                ><%=lastobj.longURL %></span
+              >
+            </div>
+            <div>
+              Short urls:
+              <span>
+                <a
+                  class="font-normal text-blue-700"
+                  href="<%=`${host}/url/${lastobj.code}` %>"
+                  ><%=`${host}/url/${lastobj.code}`%></a
+                ></span
+              >
+            </div>
+          </div>
+          <div class="flex ml-[17%] mt-12 gap-4">
+            <!-- class="flex ml-[17%] mt-22 font-bold text-xl items-start flex-col" -->
+
+            <button class="bg-red-600 w-33 h-10 border border-black rounded-md">
+              <a
+                href="http://localhost:4001"
+                target="_self"
+                rel="noopener noreferrer"
+              >
+                Refresh
+              </a>
+            </button>
+            <button class="bg-black h-10 w-auto px-2 rounded-md text-white">
+              Copy short URL
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="right w-[30%] h-full bg-yellow-500">
+        <div class="h-screen overflow-y-scroll pb-5">
+          <div class="w-full flex justify-center my-12 text-2xl">
+            Show all URLs
+          </div>
+          <div class="flex items-center gap-7 flex-col">
+            <%data.forEach((card)=>{%>
+            <div
+              class="border-2 rounded-xl h-auto bg-[#F5F5DC] border-black w-[80%] p-3"
+            >
+              <span class="font-bold">Link:</span>
+              <span class="text-[#808080]"><%= `${card.longURL}`%></span><br />
+              <span class="font-bold">Short urls:</span>
+              <span class="text-blue-500"
+                ><a href="<%= `${host}/url/${card.code}`%>"
+                  ><%= `${host}/url/${card.code}`%></a
+                ></span
+              ><br />
+              <span class="font-bold">Total clicks:</span> <span>0</span
+              ><br /><br />
+              <span class="mt-4"
+                ><a href="/delete/<%=card._id%>">Delete</a></span
+              >
+            </div>
+            <%})%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

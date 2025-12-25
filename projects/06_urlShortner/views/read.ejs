@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="bg-[#171719] h-screen px-23 py-13">
+      <span class="text-xl text-amber-50">Users</span>
+      <div class="mt-5 flex  gap-4">
+      <% users.forEach(user => { %>
+        <div class="border border-white  h-auto w-40">
+          <img
+            class="h-40 w-40 object-cover"
+            src="<%= user.url %>"
+            alt=""
+            srcset=""
+          />
+          <div class="p-3 bg-[#2c2c2e]">
+            <span class="text-white"><%= user.name %></span>
+            <br />
+            <span class="text-white"><%= user.email %></span>
+          </div>
+          <div class="p-3 flex">
+            <a
+              class="text-red-500"
+              href="/delete/<%= user._id %>"
+              target="_self"
+              rel="noopener noreferrer"
+              >delete User</a
+            >
+            <a
+              href="http://"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+              >edit user</a
+            >
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </body>
+</html>

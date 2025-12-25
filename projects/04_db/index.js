@@ -30,7 +30,7 @@ app.get("/update", async (req, res) => {
   const updated = await usermodel.findOneAndUpdate(
     { name: "wow is this for real?/" }, // searching via something
     { name: "nishank gangwar" }, // changing its something
-    { new: true }
+    { new: true },
   );
   res.send(updated);
 });
