@@ -2,6 +2,7 @@ import express from "express";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import path from "path";
+import { log } from "console";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -30,11 +31,27 @@ let randomString = (num) => {
 
   return generated;
 };
+// checking if the url already in the db just pass them that instead of creating new one
+
+let checkIfUrlAlreadyExist = (longurl) => {
+  let obj = data.find((note) => note.longURL == longurl);
+  if (obj) {
+    return obj.code;
+  } else {
+    return null;
+  }
+};
 
 app.post("/create", async (req, res) => {
   let { longurl } = req.body;
-  let code = randomString(4);
-  let urldata = {
+  let obj = checkIfUrlAlreadyExist(longurl);
+  let code;
+  if (obj) {
+    code = obj;
+  } else {
+    code = randomString(4);
+  }
+  const urldata = {
     longURL: longurl,
     code: code,
     visited: 0,

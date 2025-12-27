@@ -7,7 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
-    <% let lastobj = data[data.length-1]; console.log(lastobj) %>
+    <% let obj = data[data.length-1]; %> <% let lastobj; if (obj) { lastobj =
+    obj } else{ lastobj = {"longURL": "https://google.com", "code": "6767",
+    "visited": 0 }} %>
 
     <div class="bg-[#cdcdf1] h-screen w-full flex">
       <div class="left w-[70%] h-full flex items-center justify-center">
@@ -74,8 +76,11 @@
           <div class="w-full flex justify-center my-12 text-2xl">
             Show all URLs
           </div>
+          <% let finaldata; if (data.length>0) { finaldata = data; } else
+          {finaldata = [ {"longURL": "https://google.com", "code": "6767",
+          "visited": 0 } ] } %>
           <div class="flex items-center gap-7 flex-col">
-            <%data.forEach((card)=>{%>
+            <%finaldata.forEach((card)=>{%>
             <div
               class="border-2 rounded-xl h-auto bg-[#F5F5DC] border-black w-[80%] p-3"
             >
@@ -91,7 +96,6 @@
               ><br /><br />
               <span class="mt-4"
                 ><a href="/delete/<%=card.code%>">Delete</a></span
-                <%console.log(card.code)%>
               >
             </div>
             <%})%>
