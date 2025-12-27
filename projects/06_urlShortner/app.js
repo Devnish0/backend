@@ -1,25 +1,14 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import { fileURLToPath } from "url";
-import { UserModel } from "../05_dbmore/userModel.js";
-const __filename = fileURLToPath(import.meta.url);
 import fs from "fs";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-import path from "path";
-import { log } from "console";
-import { url } from "inspector";
-// let rawData = fs.readFileSync("./another.json", "utf-8");
-// let data = JSON.parse(rawData) ?? [];
-//
-import { URLmodel } from "./URLmodel.js";
-const rawdata = async () => {
-  return await URLmodel.find();
-};
-const data = await rawdata();
-console.log(data);
-const PORT = 4001;
+let rawData = fs.readFileSync("./another.json", "utf-8");
+let data = JSON.parse(rawData) ?? [];
 
-// Load the JSON data
+const PORT = 4001;
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -41,40 +30,29 @@ let randomString = (num) => {
 
   return generated;
 };
+
 app.post("/create", async (req, res) => {
   let { longurl } = req.body;
-  // console.log(req.body.longurl);
   let code = randomString(4);
   let urldata = {
     longURL: longurl,
     code: code,
     visited: 0,
   };
-  const created = await URLmodel.create(urldata);
-  // data.push(urldata);
-  // fs.writeFileSync("./another.json", JSON.stringify(data), "utf8");
-  res.redirect("/");
-  // res.send(created);
-});
-app.get("/url/:id", (req, res) => {
-  let { id } = req.params;
-  console.log(id);
-  //
 
-  let obj = data.find((urldata) => {
-    return urldata.code == id;
-  });
-  obj.visited += 1;
-  res.redirect(obj.longURL);
+  data.push(urldata);
+  fs.writeFileSync("./another.json", JSON.stringify(data), "utf8");
+  res.redirect("/");
 });
-app.get("/delete/:id", async (req, res) => {
-  const header = req.params.id;
-  console.log(header);
-  const deleted = await URLmodel.findOneAndDelete({ _id: header });
-  console.log(deleted);
+
+app.get("/delete/:id", (req, res) => {
+  let { id } = req.params;
+  let obj = data.find((note) => note.code == id);
+  data.splice(data.indexOf(obj), 1);
+  fs.writeFileSync("./another.json", JSON.stringify(data), "utf8");
   res.redirect("/");
 });
 
 app.listen(PORT, () => {
-  console.log(`running at ${host}`);
+  console.log(`the server os running at port `);
 });

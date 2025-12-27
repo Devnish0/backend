@@ -8,6 +8,7 @@
   </head>
   <body>
     <% let lastobj = data[data.length-1]; console.log(lastobj) %>
+
     <div class="bg-[#cdcdf1] h-screen w-full flex">
       <div class="left w-[70%] h-full flex items-center justify-center">
         <div
@@ -29,6 +30,7 @@
               class="bg-black ml-3 w-28 rounded-md text-white cursor-pointer"
             />
           </form>
+
           <div
             class="flex ml-[17%] mt-22 font-bold text-xl items-start flex-col"
           >
@@ -88,7 +90,8 @@
               <span class="font-bold">Total clicks:</span> <span>0</span
               ><br /><br />
               <span class="mt-4"
-                ><a href="/delete/<%=card._id%>">Delete</a></span
+                ><a href="/delete/<%=card.code%>">Delete</a></span
+                <%console.log(card.code)%>
               >
             </div>
             <%})%>
