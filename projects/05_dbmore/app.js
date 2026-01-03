@@ -38,6 +38,27 @@ app.get("/delete/:id", async (req, res) => {
   let z = await UserModel.findOneAndDelete({ _id: x });
   res.redirect("/users");
 });
+app.get("/edit/:id", async (req, res) => {
+  const user = await UserModel.findOne({ __id: req.params.__id });
+  res.render("edit", { user });
+});
+app.post("/edit/:id", async (req, res) => {
+  let { name, email, image } = req.body;
+  let id = req.params.id;
+  console.log("id", id);
+
+  let user = await UserModel.findOneAndUpdate(
+    { _id: id },
+    {
+      name: name,
+      email: email,
+      url: image,
+    },
+    { new: true }
+  );
+
+  res.redirect("/users");
+});
 // app.get("*", (req, res) => {
 //   res.status(404).send("Route not found");
 // });

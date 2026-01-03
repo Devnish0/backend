@@ -8,7 +8,9 @@
   </head>
   <body>
     <div class="bg-[#171719] h-screen px-23 py-13">
+      <span class="text-xl text-blue-700 underline cursor-pointer"><a href="/">Go back</a></span><br><br>
       <span class="text-xl text-amber-50">Users</span>
+
       <div class="mt-5 flex  gap-4">
       <% users.forEach(user => { %>
         <div class="border border-white  h-auto w-40">
@@ -32,9 +34,9 @@
               >delete User</a
             >
             <a
-              href="http://"
+              href="/edit/<%=user._id%>"
               class="text-white"
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
               >edit user</a
             >

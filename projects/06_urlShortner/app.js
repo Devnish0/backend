@@ -1,13 +1,22 @@
 import express from "express";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import { promises as fsPromises } from "fs";
 import path from "path";
 import { log } from "console";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-let rawData = fs.readFileSync("./another.json", "utf-8");
-let data = JSON.parse(rawData) ?? [];
+let data = [];
+
+(async () => {
+  try {
+    let rawData = await fsPromises.readFile("./another.json", "utf-8");
+    data = JSON.parse(rawData) ?? [];
+  } catch (e) {
+    data = [];
+  }
+})();
 
 const PORT = 4001;
 
@@ -58,18 +67,18 @@ app.post("/create", async (req, res) => {
   };
 
   data.push(urldata);
-  fs.writeFileSync("./another.json", JSON.stringify(data), "utf8");
+  await fsPromises.writeFile("./another.json", JSON.stringify(data), "utf8");
   res.redirect("/");
 });
 
-app.get("/delete/:id", (req, res) => {
+app.get("/delete/:id", async (req, res) => {
   let { id } = req.params;
   let obj = data.find((note) => note.code == id);
   data.splice(data.indexOf(obj), 1);
-  fs.writeFileSync("./another.json", JSON.stringify(data), "utf8");
+  await fsPromises.writeFile("./another.json", JSON.stringify(data), "utf8");
   res.redirect("/");
 });
 
 app.listen(PORT, () => {
-  console.log(`the server os running at port `);
+  console.log(`the server is running at port ${PORT}`);
 });
